@@ -16,3 +16,20 @@ library(tidyverse)
 hp_data <- read_csv("harry_potter_aggression_full.csv")
 ```
 I did a thing! Critical place to SAVE THIS VERSION
+can keep this version stored somewhere, in case I need to look back at it
+
+2. Basic wrangling and make graph of Harry Potter vs Draco Malfoy aggression rates
+
+```{r}
+hp_graph <- hp_data %>% 
+  filter(Name == "Harry" | Name == "Draco Malfoy") %>% 
+  select(Name, book, agg.per.mention) %>% 
+  ggplot(aes(x= book, y = agg.per.mention))+
+  geom_col(aes(fill = Name), position = "dodge")+
+  coord_flip()+
+  theme_bw()
+
+hp_graph
+  # will automatically make a stacked column graph --weird cause it combines into one, so we wanta  clustered column graph -- added postiion = "dodge"
+```
+
